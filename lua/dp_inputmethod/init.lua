@@ -1,7 +1,7 @@
 -- Copyright (c) 2024 liudepei. All Rights Reserved.
 -- create at 2024/04/08 19:15:05 Monday
 
--- [ ] TODO: do not depend on base
+-- [ ] TODO: do not depend on base, because it should be called soon
 
 local M = {}
 
@@ -21,7 +21,6 @@ M.lang = nil
 function M.change_language(lang)
   vim.g.lang = lang
   vim.g.res = 1
-  vim.g.inputmethod_txt = vim.fn.stdpath 'data' .. '\\DataSub\\inputmethod.txt'
   vim.cmd [[
     python << EOF
 import win32api
@@ -34,12 +33,9 @@ LANG = {
 try:
   hwnd = win32gui.GetForegroundWindow()
   language = LANG[vim.eval('g:lang')]
-  inputmethod_txt = vim.eval('g:inputmethod_txt')
   result = win32api.SendMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, 0, language)
   vim.command(f'let g:res = {result}')
   import time
-  with open(inputmethod_txt, 'ab') as f:
-    f.write((f"{vim.eval('g:lang')}: {time.time()}\n").encode('utf-8'))
 except Exception as e:
   print('change_language - Exception:', e)
 EOF
