@@ -1,8 +1,6 @@
 -- Copyright (c) 2024 liudepei. All Rights Reserved.
 -- create at 2024/04/08 19:15:05 Monday
 
--- [ ] TODO: do not depend on base, because it should be called soon
-
 local M = {}
 
 local sta, B = pcall(require, 'dp_base')
