@@ -101,13 +101,9 @@ function M.toggle_lang_in_cmdline()
   end
 end
 
-M.defaults = {
+require 'which-key'.register {
   ['<c-F1>'] = { function() M.toggle_lang_in_cmdline() end, 'toggle: EN/ZH', mode = { 'n', 's', 'v', 'c', 'i', 't', }, silent = true, },
   ['<c-;>'] = { function() M.i_enter() end, 'Enter new empty line', mode = { 'i', }, silent = true, },
 }
-
-function M.setup(options)
-  require 'which-key'.register(vim.tbl_deep_extend('force', {}, M.defaults, options or {}))
-end
 
 return M
