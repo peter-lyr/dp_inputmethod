@@ -32,7 +32,7 @@ LANG = {
 try:
   hwnd = win32gui.GetForegroundWindow()
   language = LANG[vim.eval('g:lang')]
-  result = win32api.SendMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, 0, language)
+  result = win32api.PostMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, None, language)
   vim.command(f'let g:res = {result}')
   import time
 except Exception as e:
