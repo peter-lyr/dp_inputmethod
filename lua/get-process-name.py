@@ -1,3 +1,4 @@
+# 仅测试用
 import win32gui, win32process, psutil
 
 def active_window_process_name():
