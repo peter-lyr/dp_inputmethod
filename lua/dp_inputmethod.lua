@@ -8,7 +8,7 @@ local sta, B = pcall(require, 'dp_base')
 if not sta then return print('Dp_base is required!', debug.getinfo(1)['source']) end
 
 M.source = B.getsource(debug.getinfo(1)['source'])
-M.input_method_py = B.get_file_under_source(M.source, 'input-method.py')
+M.input_method_py = B.get_file_under_source(M.source, 'change-input-method.py')
 
 M.lang = nil
 
