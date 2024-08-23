@@ -48,15 +48,31 @@
 # 240823-14h03m
 # 存在问题：
 # 不能在多个地方去跑
+# 优化（第四版）
 
 import ctypes
 import sys
 import time
 
+import psutil
 import pyautogui
 import win32api
 import win32gui
+import win32process
 from win32con import WM_INPUTLANGCHANGEREQUEST
+
+# 此py给nvim-qt.exe切换输入法用，
+# emacs.exe也有一个输入法切换，
+# 当nvim-qt.exe切换到emacs.exe时，不再切换
+exclude_exes = ["emacs.exe"]
+
+
+def active_window_process_name():
+    try:
+        pid = win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())
+        return psutil.Process(pid[-1]).name().strip()
+    except:
+        return 'xx'
 
 
 def check_input_method():
@@ -79,6 +95,7 @@ try:
     hwnd = win32gui.GetForegroundWindow()
     win32api.PostMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, None, LANG[sys.argv[1]])
     time.sleep(0.1)
-    check_input_method()
+    if active_window_process_name() not in exclude_exes:
+        check_input_method()
 except Exception as e:
     print("change_language - Exception:", e)
