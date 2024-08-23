@@ -94,7 +94,7 @@ LANG = {"ZH": 0x0804, "EN": 0x0409}
 try:
     hwnd = win32gui.GetForegroundWindow()
     win32api.PostMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, None, LANG[sys.argv[1]])
-    time.sleep(0.1)
+    time.sleep(0.01)
     if active_window_process_name() not in exclude_exes:
         check_input_method()
 except Exception as e:
