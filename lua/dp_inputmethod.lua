@@ -27,6 +27,16 @@ B.aucmd('ModeChanged', 'inputmethod.ModeChanged', {
   end,
 })
 
+B.aucmd('CmdlineLeave', 'inputmethod.CmdlineLeave', {
+  callback = function()
+    if B.is_in_tbl(vim.fn.mode(), { 'i', 't', 'r', 'R', }) then
+      M.change_language 'ZH'
+    else
+      M.change_language 'EN'
+    end
+  end,
+})
+
 B.aucmd('FocusLost', 'inputmethod.FocusLost', {
   callback = function()
     M.change_language 'ZH'
