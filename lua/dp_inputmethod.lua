@@ -39,16 +39,10 @@ B.aucmd('CmdlineLeave', 'inputmethod.CmdlineLeave', {
 
 B.aucmd('FocusLost', 'inputmethod.FocusLost', {
   callback = function()
-    M.change_language 'ZH'
-  end,
-})
-
-B.aucmd('FocusGained', 'inputmethod.FocusGained', {
-  callback = function()
     if B.is_in_tbl(vim.fn.mode(), { 'c', 'i', 't', 'r', 'R', }) then
-      M.change_language 'ZH'
+      B.write_lines_to_file({ '1', }, [[C:\Windows\Temp\nvim-qt.exe-input-method.txt]])
     else
-      M.change_language 'EN'
+      B.write_lines_to_file({ '0', }, [[C:\Windows\Temp\nvim-qt.exe-input-method.txt]])
     end
   end,
 })
